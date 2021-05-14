@@ -8,7 +8,7 @@ export const router = {};
 router.setState = function(update, state, entryVar) {
   const body = document.querySelector('body');
   const header = document.querySelector('header > h1');
-  let stateVar = {'state': 0, 'index': 0};
+  let historyState = {'state': 0, 'index': 0};
   let url;
   
   if(state == null){
@@ -19,7 +19,7 @@ router.setState = function(update, state, entryVar) {
     case 1:
       body.className = "";
       header.textContent = "Journal Entries";
-      stateVar.state = state;
+      historyState.state = state;
       url = '/';
       break;
     case 2:
@@ -27,7 +27,7 @@ router.setState = function(update, state, entryVar) {
       if(update){
         let parent = entryVar.parentNode;
         index = 1 + Array.prototype.indexOf.call(parent.children, entryVar);
-        stateVar.index = index;
+        historyState.index = index;
 
         body.removeChild(document.querySelector('entry-page'));
         let entryPage = document.createElement('entry-page');
@@ -38,18 +38,18 @@ router.setState = function(update, state, entryVar) {
       }
       body.className = "single-entry";
       header.textContent = "Entry "+index;
-      stateVar.state = state;
+      historyState.state = state;
       url = '#entry'+index;
       break;
     case 3:
       body.className = "settings";
       header.textContent = "Settings";
-      stateVar.state = state;
+      historyState.state = state;
       url = '#settings';
       break;
   }
   if(update){
-    history.pushState(stateVar, '', url)
+    history.pushState(historyState, '', url)
   }
   /**
    * - There are three states that your SPA app will have
