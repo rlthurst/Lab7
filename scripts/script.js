@@ -16,3 +16,23 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 });
+
+const title = document.querySelector('header > h1')
+title.addEventListener('click', () => {
+  setState(true, 1);
+});
+
+const settingBtn = document.querySelector('header > img');
+settingBtn.addEventListener('click', () => {
+  setState(true, 3);
+});
+
+// On entry-page click, pass in entry data as entry param
+document.querySelector('main').addEventListener('click', (event) => {
+  setState(true, 2, event.target);
+});
+
+// On page back/forward, pass in entry index as entry param (for state: 2)
+window.addEventListener('popstate', (event) => {
+  setState(false, event.state.state, event.state.index);
+});
