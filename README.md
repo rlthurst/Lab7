@@ -1,5 +1,5 @@
 # Lab7_Solution
-https://rlthurst.github.io/Lab6
+https://rlthurst.github.io/Lab7
 
 ## Author(s):
 
