@@ -4,6 +4,17 @@ import { router } from './router.js'; // Router imported so you can use it to ma
 const setState = router.setState;
 
 // Make sure you register your service worker here too
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js').then(function(registration) {
+      // Registration was successful
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }, function(err) {
+      // registration failed :(
+      console.log('ServiceWorker registration failed: ', err);
+    });
+  });
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   fetch('https://cse110lab6.herokuapp.com/entries')
@@ -34,5 +45,9 @@ document.querySelector('main').addEventListener('click', (event) => {
 
 // On page back/forward, pass in entry index as entry param (for state: 2)
 window.addEventListener('popstate', (event) => {
-  setState(false, event.state.state, event.state.index);
+  if(event.state){
+    setState(false, event.state.state, event.state.index);
+  } else{
+    setState(false, 1);
+  }
 });

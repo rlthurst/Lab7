@@ -11,10 +11,6 @@ router.setState = function(update, state, entryVar) {
   let historyState = {'state': 0, 'index': 0};
   let url;
   
-  if(state == null){
-    state = 1;
-  }
-
   switch(state){
     case 1:
       body.className = "";
